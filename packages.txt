@@ -68,3 +68,4 @@ python-wheel
 mpv
 wlroots
 ttf-roboto
+dolphin-plugins
