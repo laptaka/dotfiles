@@ -71,6 +71,9 @@ rm -rf qt5ct
 # Enable SDDM at startup
 sudo systemctl enable sddm
 
+# Enable idlehack on startup
+sudo systemctl enable idlehack
+
 # Add SDDM theme to sddm.conf.d (create file if not exist)
 sudo touch /etc/sddm.conf.d/theme.conf
 echo '[Theme]' | sudo tee -a /etc/sddm.conf.d/theme.conf
