@@ -20,6 +20,8 @@ sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg
 echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
 echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
 
+sudo pacman -Syyu
+
 # Install packages noconfirm and needed from packages.txt
 sudo pacman -S --noconfirm --needed - < packages.txt
 
