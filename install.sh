@@ -68,9 +68,6 @@ cp themes/Catppuccin-Mocha.conf ~/.config/qt5ct/colors
 cd ..
 rm -rf qt5ct
 
-# Enable SDDM at startup
-sudo systemctl enable sddm
-
 # Enable idlehack on startup
 sudo systemctl enable idlehack
 
@@ -81,3 +78,6 @@ echo 'Current=sddm-slice' | sudo tee -a /etc/sddm.conf.d/theme.conf
 
 # Install rEFInd
 refind-install
+
+# Enable SDDM at startup
+sudo systemctl enable sddm
