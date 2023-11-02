@@ -6,3 +6,4 @@ xwaylandvideobridge-bin
 sddm-slice-git
 swayosd-git
 sddm-conf-git
+nvitop

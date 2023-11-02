@@ -74,4 +74,3 @@ gnome-clocks
 gnome-calendar
 konsole
 nvidia-settings
-nvitop
