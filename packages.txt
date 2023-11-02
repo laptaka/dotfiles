@@ -69,3 +69,7 @@ mpv
 wlroots
 ttf-roboto
 dolphin-plugins
+pamac-nosnap
+gnome-clocks
+gnome-calendar
+konsole

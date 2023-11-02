@@ -1,5 +1,10 @@
+MenuBar=Disabled
+
 [$Version]
 update_info=dolphin_detailsmodesettings.upd:rename-leading-padding,dolphin_detailsmodesettings.upd:move-content-display
+
+[Desktop Entry]
+DefaultProfile=Profile 1.profile
 
 [General]
 Version=202

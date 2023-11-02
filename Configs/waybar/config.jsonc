@@ -57,7 +57,9 @@
 
     "clock": {
         "format": "{:%H:%M  󰃭   %a %d}",
-        "tooltip-format": "<tt><big>{calendar}</big></tt>"
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "on-click": "gnome-clocks",
+        "on-click-right": "gnome-calendar"
     },
 
     "hyprland/language":{
@@ -70,10 +72,10 @@
         "format": "{icon}   {volume}",
         "format-muted": "婢",
         "on-click": "pavucontrol -t 3",
-        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -o m",
-        "on-scroll-up": "~/.config/hypr/scripts/volumecontrol.sh -o i",
-        "on-scroll-down": "~/.config/hypr/scripts/volumecontrol.sh -o d",
-        "tooltip-format": "{icon} {desc} // {volume}%",
+        "on-click-middle": "swayosd-client --output-volume mute-toggle",
+        "on-scroll-up": "swayosd-client --output-volume raise",
+        "on-scroll-down": "swayosd-client --output-volume lower",
+        "tooltip-format": "{icon}  {desc} // {volume}%",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -91,7 +93,7 @@
         "format-source": "",
         "format-source-muted": "",
         "on-click": "pavucontrol -t 4",
-        "on-click-middle": "~/.config/hypr/scripts/volumecontrol.sh -i m",
+        "on-click-middle": "swayosd-client --input-volume mute-toggle",
         "tooltip-format": "{format_source} {source_desc} // {source_volume}%",
         "scroll-step": 5
     },
@@ -121,11 +123,10 @@
 
     "custom/power": {
         "format": "{}",
-        "exec": "echo ; echo    Logout",
         "on-click": "pkill rofi || ~/.config/rofi/powermenu/type-5/powermenu.sh",
         "on-click-right": "~/.config/hypr/scripts/reload.sh",
         "interval" : 86400, // once every day
-        "tooltip": true
+        "tooltip": false
     },
 
 
