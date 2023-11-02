@@ -1,0 +1,6 @@
+rofi-git
+libdeep_filter_ladspa-bin 
+epson-printer-utility
+idlehack-git
+xwaylandvideobridge-bin
+sddm-slice-git
