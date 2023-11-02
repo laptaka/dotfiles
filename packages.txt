@@ -73,3 +73,4 @@ pamac-nosnap
 gnome-clocks
 gnome-calendar
 konsole
+nvidia-settings

@@ -80,6 +80,7 @@ rm -rf mpvpaper
 
 # Enable idlehack on startup
 systemctl --user enable idlehack
+systemctl --user start idlehack
 
 # Install rEFInd
 refind-install
