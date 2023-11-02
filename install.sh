@@ -26,6 +26,9 @@ sudo pacman -S --noconfirm --needed - < packages.txt
 # Install AUR packages noconfirm and needed from aurpackages.txt
 yay -S --noconfirm --needed - < aurpackages.txt
 
+#Install fisher
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
 # Copy files from Configs to ~/.config
 cp -r Configs/* ~/.config
 
