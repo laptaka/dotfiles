@@ -45,6 +45,7 @@ confirm_cmd() {
 		-theme-str 'element-text {horizontal-align: 0.5;}' \
 		-theme-str 'textbox {horizontal-align: 0.5;}' \
 		-dmenu \
+		-x11 \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
 		-theme ${dir}/${theme}.rasi
