@@ -9,7 +9,7 @@ echo 'Defaults timestamp_timeout=60' | sudo tee -a /etc/sudoers.d/defaults
 # Replace line that contains 'ParallelDownloads' in pacman.conf with 'ParallelDownloads = 10'
 sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
 
-sudo pacman -S reflector
+sudo pacman -S --needed --noconfirm reflector
 # Replace sort by age with sort by rate in reflector.conf
 sudo sed -i '/--sort age/c\--sort rate' /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.timer
@@ -25,7 +25,7 @@ sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mi
 echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
 echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
 
-sudo pacman -Syyu
+sudo pacman --noconfirm -Syyu
 
 # Ask user for nvidia packages
 read -p "You got green card (nvidia)? (Y/n): " -r asknvidia
