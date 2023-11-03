@@ -158,7 +158,7 @@ sudo systemctl enable --now swayosd-libinput-backend.service
 
 # Append XDG_SCREENSHOTS_DIR="$HOME/Pictures/Screenshots" to ~/.config/user-dirs.dirs
 mkdir -p ~/Pictures/Screenshots
-echo 'XDG_SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"' | sudo tee -a ~/.config/user-dirs.dirs
+echo 'XDG_SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"' | tee -a ~/.config/user-dirs.dirs
 
 # Enable SDDM at startup
 sudo systemctl enable sddm
