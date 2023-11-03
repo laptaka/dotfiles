@@ -7,7 +7,6 @@ spotify
 spicetify-cli
 zenity
 steam
-wine-staging
 winetricks
 giflib
 lib32-giflib
