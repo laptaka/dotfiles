@@ -126,8 +126,8 @@ if [ ! -f "~/.config/kdeglobals" ]; then
     touch ~/.config/kdeglobals
     
     # Print [General] and TerminalApplication=kitty in the file
-    echo "[General]" >> "~/.config/kdeglobals"
-    echo "TerminalApplication=kitty" >> "~/.config/kdeglobals"
+    echo "[General]" >> ~/.config/kdeglobals
+    echo "TerminalApplication=kitty" >> ~/.config/kdeglobals
 fi
 if [ -f "~/.config/kdeglobals" ]; then
     sed -i '/\[General\]/a TerminalApplication=kitty' "~/.config/kdeglobals"
