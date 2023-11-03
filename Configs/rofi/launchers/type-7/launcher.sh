@@ -16,4 +16,5 @@ theme='style-6'
 ## Run
 rofi \
     -show drun \
+    -x11 \
     -theme ${dir}/${theme}.rasi

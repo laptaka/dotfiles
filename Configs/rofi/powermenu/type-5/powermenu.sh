@@ -32,6 +32,7 @@ no=''
 rofi_cmd() {
 	rofi -dmenu \
 		-p " $USER@$host" \
+		-x11 \
 		-mesg " Uptime: $uptime" \
 		-theme ${dir}/${theme}.rasi
 }

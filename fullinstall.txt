@@ -1,0 +1,8 @@
+easyeffects
+speech-dispatcher
+baobab
+gnome-disk-utility
+gradience
+gnome-calculator
+visual-studio-code-bin
+pamac-nosnap
