@@ -104,6 +104,7 @@ if [[ $asklapted =~ ^[Yy]$ ]]; then
     # Spotify
     sudo chmod a+wr /opt/spotify
     sudo chmod a+wr /opt/spotify/Apps -R
+    sudo usermod -a -G games $USER
 else
     echo "thought so"
 fi
@@ -165,3 +166,10 @@ sudo systemctl enable sddm
 # Copy sddm.conf to /etc/sddm.conf.d (create dir if not exist)
 sudo mkdir -p /etc/sddm.conf.d
 sudo cp Misc/sddm.conf /etc/sddm.conf.d/
+
+# Copy .directory file to ~/.local/share/dolphin/view_properties/global/
+mkdir -p ~/.local/share/dolphin/view_properties/global/
+cp Misc/.directory ~/.local/share/dolphin/view_properties/global/
+
+# Copy nwg-look folder to ~/.local/share/
+cp -r Misc/nwg-look/ ~/.local/share/

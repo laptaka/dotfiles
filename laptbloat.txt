@@ -55,3 +55,6 @@ wine-ge-custom
 gamescope
 lib32-sdl12-compat
 proton-ge-custom-bin
+kdialog
+xboxdrv
+python-kivy
