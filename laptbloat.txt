@@ -58,3 +58,7 @@ proton-ge-custom-bin
 kdialog
 xboxdrv
 python-kivy
+gst-plugins-good
+lib32-gst-plugins-good
+libgphoto2
+lib32-pipewire-jack

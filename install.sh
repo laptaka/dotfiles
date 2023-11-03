@@ -105,6 +105,7 @@ if [[ $asklapted =~ ^[Yy]$ ]]; then
     sudo chmod a+wr /opt/spotify
     sudo chmod a+wr /opt/spotify/Apps -R
     sudo usermod -a -G games $USER
+    sudo systemctl restart systemd-binfmt
 else
     echo "thought so"
 fi
