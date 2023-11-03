@@ -1,5 +1,5 @@
 dolphin
-waybar-experimental-git
+waybar
 btop
 grimblast-git
 lightly-boehs-git
