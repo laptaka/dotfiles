@@ -88,7 +88,6 @@ if [[ $askbloated =~ ^[Yy]$ ]]; then
     # Copy argv.json to $HOME/.vscode (create dir if not exist)
     mkdir -p ~/.vscode
     cp Misc/argv.json ~/.vscode
-fi
 else
     echo "Skipping bloat"
 fi
@@ -124,7 +123,7 @@ cp -r Configs/* ~/.config
 
 if [ ! -f "~/.config/kdeglobals" ]; then
     # Create the file if it doesn't exist
-    touch "~/.config/kdeglobals"
+    touch ~/.config/kdeglobals
     
     # Print [General] and TerminalApplication=kitty in the file
     echo "[General]" >> "~/.config/kdeglobals"
