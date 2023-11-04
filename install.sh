@@ -1,10 +1,10 @@
 # Holy fuck this is like entirely AI-generated.
 #!/bin/bash
 
-sudo timedatectl set-local-rtc 1 --adjust-system-clock
-
 # Add Defaults timestamp_timeout=60 to sudoers.d file timeout
 echo 'Defaults timestamp_timeout=60' | sudo tee -a /etc/sudoers.d/defaults
+
+sudo timedatectl set-local-rtc 1 --adjust-system-clock
 
 # Replace line that contains 'ParallelDownloads' in pacman.conf with 'ParallelDownloads = 10'
 sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
