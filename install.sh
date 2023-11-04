@@ -1,8 +1,8 @@
 # Holy fuck this is like entirely AI-generated.
 #!/bin/bash
 
-# Add Defaults timestamp_timeout=60 to sudoers.d file timeout
-echo 'Defaults timestamp_timeout=60' | sudo tee -a /etc/sudoers.d/defaults
+# Add Defaults timestamp_timeout=10 to sudoers.d file timeout
+echo 'Defaults timestamp_timeout=10' | sudo tee -a /etc/sudoers.d/defaults
 
 sudo timedatectl set-local-rtc 1 --adjust-system-clock
 
