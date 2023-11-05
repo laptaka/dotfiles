@@ -1,116 +1,48 @@
 # Holy fuck this is like entirely AI-generated.
 #!/bin/bash
 
-# Add Defaults timestamp_timeout=10 to sudoers.d file timeout
-echo 'Defaults timestamp_timeout=10' | sudo tee -a /etc/sudoers.d/defaults
+exec > >(tee myfile.log) 2>&1
 
-sudo timedatectl set-local-rtc 1 --adjust-system-clock
-
-# Replace line that contains 'ParallelDownloads' in pacman.conf with 'ParallelDownloads = 10'
-sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
-
-sudo pacman -S --needed --noconfirm reflector
-# Replace sort by age with sort by rate in reflector.conf
-sudo sed -i '/--sort age/c\--sort rate' /etc/xdg/reflector/reflector.conf
-sudo systemctl enable reflector.timer
-sudo systemctl start reflector.service
-
-# Add Chaotic-AUR
-sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign-key 3056513887B78AEB
-sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 
-sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-
-# Add Chaotic-AUR to pacman.conf
-echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
-echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
-
-sudo pacman --noconfirm -Syyu
-
-# Ask user for nvidia packages
-read -p "You got green card (nvidia)? (Y/n): " -r asknvidia
-echo
-asknvidia=${asknvidia:-Y}
-if [[ $asknvidia =~ ^[Yy]$ ]]; then
-    echo "Installing nvidia packages"
-    yay -S --noconfirm --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings hyprland-nvidia nvitop vulkan-icd-loader lib32-vulkan-icd-loader
-else
-    echo "Skipping nvidia packages"
-    yay -S --noconfirm --needed hyprland
+clear
+# Check if yay is installed, install yay and dependencies if not
+if ! command -v yay &> /dev/null
+then
+    echo "Log: yay not found, installing yay"
+    sudo pacman -S --noconfirm --needed git base-devel
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd ..
+    rm -rf yay
 fi
 
-# Ask user for fish
-read -p "Install fish shell? (Y/n): " -r askfish
-echo
-askfish=${askfish:-Y}
-if [[ $askfish =~ ^[Yy]$ ]]; then
-    echo "Installing fish"
-    sudo pacman -S --noconfirm --needed fish
-    cp Misc/.bashrc ~
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-else
-    echo "No fish for you >:("
-fi
 
-# Ask user for refind
-read -p "Install refind? (Y/n): " -r askrefind
-echo
-askrefind=${askrefind:-Y}
-if [[ $askrefind =~ ^[Yy]$ ]]; then
-    echo "Installing refind"
-    sudo pacman -S --noconfirm --needed refind
-    refind-install
+clear
+# Make the user choose between a minimal and full install. Run Scripts/minimal.sh if minimal and Scripts/full.sh if full.
+# If any other input is given, make user choose again
+choice=""
+while [[ "$choice" != "m" && "$choice" != "M" && "$choice" != "f" && "$choice" != "F" ]]; do
+    echo "Choose between a minimal (M) and full (f) install:"
+    read -r choice
+    echo
 
-    # Change timeout 20 (exact match) to timeout 10
-    sudo sed -i '/timeout 20/c\timeout 10' /boot/efi/EFI/refind/refind.conf
-    # Uncomment 'default_selection Microsoft'
-    sudo sed -i '/default_selection Microsoft/c\default_selection Microsoft' /boot/efi/EFI/refind/refind.conf
-    # Uncomment use_graphics_for
-    sudo sed -i '/use_graphics_for/c\use_graphics_for linux' /boot/efi/EFI/refind/refind.conf
-    # Download rEFInd theme (create dir if not exist)
-    sudo mkdir -p /boot/efi/EFI/refind/themes
-    # git clone theme to /boot/efi/EFI/refind/themes
-    sudo git clone https://github.com/bushtail/refind-efifetch ~/.config/refind/themes
-else
-    echo "Skipping refind"
-fi
+    case "$choice" in
+        m|M)
+            # Run minimal.sh script
+            ./Scripts/minimal.sh
+            ;;
+        f|F)
+            # Run full.sh script
+            ./Scripts/full.sh
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            ;;
+    esac
+done
 
-# Install packages noconfirm and needed from packages.txt
-yay -S --noconfirm --needed - < packages.txt
 
-# Ask for bloated installation
-read -p "Install bloat (check fullinstall.txt)? (Y/n): " -r askbloated
-echo
-askbloated=${askbloated:-Y}
-if [[ $askbloated =~ ^[Yy]$ ]]; then
-    echo "Installing bloat"
-    yay -S --noconfirm --needed - < fullinstall.txt
-    # Copy argv.json to $HOME/.vscode (create dir if not exist)
-    mkdir -p ~/.vscode
-    cp Misc/argv.json ~/.vscode
-else
-    echo "Skipping bloat"
-fi
-
-# Ask for Lapted install
-read -p "Are you Lapt? (y/N): " -r asklapted
-echo
-asklapted=${asklapted:-N}
-if [[ $asklapted =~ ^[Yy]$ ]]; then
-    echo "sup, me"
-    yay -S --noconfirm --needed - < laptbloat.txt
-    sudo systemctl enable --now ecbd.service
-    # Replace line hosts: mymachines in /etc/nsswitch.conf with hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
-    sudo sed -i '/hosts: mymachines/c\hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns' /etc/nsswitch.conf
-    # Spotify
-    sudo chmod a+wr /opt/spotify
-    sudo chmod a+wr /opt/spotify/Apps -R
-    sudo usermod -a -G games $USER
-    sudo systemctl restart systemd-binfmt
-else
-    echo "thought so"
-fi
-
+clear
 # Catppuccin GTK
 git clone --recurse-submodules https://github.com/catppuccin/gtk
 cd gtk

@@ -1,6 +1,4 @@
 dolphin
-waybar
-btop
 grimblast-git
 lightly-boehs-git
 nm-connection-editor
@@ -45,7 +43,6 @@ neofetch
 dolphin
 ark
 vlc
-flatseal
 papirus-icon-theme
 ninja
 meson
@@ -67,3 +64,4 @@ xwaylandvideobridge-bin
 sddm-slice-git
 swayosd-git
 sddm-conf-git
+waybar
