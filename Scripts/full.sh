@@ -35,7 +35,7 @@ sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mi
 
 # Add Chaotic-AUR to pacman.conf
 echo "Log: Adding Chaotic-AUR to pacman.conf"
-echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
+echo -e '\n[chaotic-aur]' | sudo tee -a /etc/pacman.conf
 echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
 
 # Update the package database and upgrade all installed packages
