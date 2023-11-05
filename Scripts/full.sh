@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Add Defaults timestamp_timeout=10 to sudoers.d file timeout
 echo 'Log: Writing timestamp_timeout=10 to /etc/sudoers.d/defaults'
 echo 'Defaults timestamp_timeout=10' | sudo tee -a /etc/sudoers.d/defaults
@@ -14,7 +13,6 @@ sudo echo "Log: Local RTC set to 1 and system clock adjusted successfully."
 sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
 echo "Log: ParallelDownloads set to 10"
 
-
 # Install reflector
 echo "Log: Installing reflector"
 sudo pacman -S --needed --noconfirm reflector
@@ -25,12 +23,11 @@ sudo sed -i '/--sort age/c\--sort rate' /etc/xdg/reflector/reflector.conf
 sudo systemctl enable reflector.timer
 sudo systemctl start reflector.service
 
-
 # Add Chaotic-AUR
 echo "Log: Adding Chaotic-AUR to pacman keyring"
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 sudo pacman-key --lsign-key 3056513887B78AEB
-sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
 sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
 # Add Chaotic-AUR to pacman.conf
@@ -42,7 +39,6 @@ echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
 echo "Log: Updating the package database and upgrading all installed packages"
 sudo pacman --noconfirm -Syyu
 
-
 # Install fish
 echo "Log: Installing fish"
 sudo pacman -S --noconfirm --needed fish
@@ -52,14 +48,12 @@ cp Misc/.bashrc ~
 echo "Log: Installing fisher"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
-
 echo "Log: Adding lines from fullinstall.txt to packages.txt"
-cat Misc/fullinstall.txt >> packages.txt
+cat Misc/fullinstall.txt >>packages.txt
 
 # Install packages
 echo "Log: Installing packages (full)"
-yay -S --noconfirm --needed - < packages.txt
-
+yay -S --noconfirm --needed - <packages.txt
 
 # Copy argv.json to $HOME/.vscode (create dir if not exist)
 echo "Log: Copying argv.json to $HOME/.vscode"
@@ -73,7 +67,7 @@ sudo chmod a+wr /opt/spotify/Apps -R
 
 # Add games group
 echo "Log: Adding games group"
-sudo usermod -a -G games $USER
+sudo usermod -a -G games "$USER"
 
 # Change timeout 20 (exact match) to timeout 10
 echo "Log: Changing timeout 20 to timeout 10 in refinf.conf"
