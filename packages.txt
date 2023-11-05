@@ -1,3 +1,4 @@
+hyprland
 dolphin
 grimblast-git
 lightly-boehs-git

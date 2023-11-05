@@ -1,6 +1,7 @@
 #!/bin/bash
 
-clear
+source ../install.sh
+
 # Add Defaults timestamp_timeout=10 to sudoers.d file timeout
 echo 'Log: Writing timestamp_timeout=10 to /etc/sudoers.d/defaults'
 echo 'Defaults timestamp_timeout=10' | sudo tee -a /etc/sudoers.d/defaults
@@ -15,7 +16,6 @@ sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
 echo "Log: ParallelDownloads set to 10"
 
 
-clear
 # Install reflector
 echo "Log: Installing reflector"
 sudo pacman -S --needed --noconfirm reflector
@@ -27,7 +27,6 @@ sudo systemctl enable reflector.timer
 sudo systemctl start reflector.service
 
 
-clear
 # Add Chaotic-AUR
 echo "Log: Adding Chaotic-AUR to pacman keyring"
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
@@ -55,22 +54,14 @@ echo "Log: Installing fisher"
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 
 
-clear
-# Nvidia
-read -p "You got green card (nvidia)? (Y/n): " -r asknvidia
-echo
-asknvidia=${asknvidia:-Y}
-if [[ $asknvidia =~ ^[Yy]$ ]]; then
-    echo "Log: Installing nvidia packages, installing hyprland-nvidia"
-    yay -S --noconfirm --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings hyprland-nvidia nvitop
-else
-    echo "Log: Skipping nvidia packages, installing hyprland"
-    yay -S --noconfirm --needed hyprland
-fi
+echo "Log: Adding lines from fullinstall.txt to packages.txt"
+cat ../Misc/fullinstall.txt >> ../packages.txt
 
 # Install packages
-echo "Log: Installing packages from fullinstall.txt"
-yay -S --noconfirm --needed - < ../fullinstall.txt
+echo "Log: Installing packages (full)"
+yay -S --noconfirm --needed - < ../packages.txt
+
+
 # Copy argv.json to $HOME/.vscode (create dir if not exist)
 echo "Log: Copying argv.json to $HOME/.vscode"
 mkdir -p ~/.vscode

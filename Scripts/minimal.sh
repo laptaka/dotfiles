@@ -1,15 +1,15 @@
 #!/bin/bash
 
+source ../install.sh
+
 # Nvidia
-read -p "You got green card (nvidia)? (Y/n): " -r asknvidia
-echo
-asknvidia=${asknvidia:-Y}
-if [[ $asknvidia =~ ^[Yy]$ ]]; then
-    echo "Log: Installing nvidia packages, installing hyprland-nvidia"
-    yay -S --noconfirm --needed nvidia-dkms nvidia-utils hyprland-nvidia
+if nvidia_detect ; then
+    echo "Log: Installing nvidia packages"
+    echo -e "nvidia-dkms\nnvidia-utils" >>../packages.txt
+    # replace hyprland with hyprland-nvidia
+    sed -i "s/^hyprland/hyprland-nvidia/g" ../fullinstall.txt
 else
-    echo "Log: Skipping nvidia packages, installing hyprland"
-    yay -S --noconfirm --needed hyprland
+    echo "Log: Skipping nvidia packages"
 fi
 
 # Install packages
