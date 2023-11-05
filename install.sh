@@ -39,12 +39,12 @@ nvidia_detect()
 
 # If nvidia_detect function is true, install nvidia packages
 if nvidia_detect ; then
-    echo "Log: Installing nvidia packages"
+    echo "Log: Adding nvidia packages"
     echo -e "nvidia-dkms\nnvidia-utils\nnvitop" >>../packages.txt
     # replace hyprland with hyprland-nvidia
     sed -i "s/^hyprland/hyprland-nvidia/g" ../packages.txt
 else
-    echo "Log: Skipping nvidia packages"
+    echo "Log: Skipping adding nvidia packages"
 fi
 
 clear
