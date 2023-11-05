@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source ../install.sh
 
 # Add Defaults timestamp_timeout=10 to sudoers.d file timeout
 echo 'Log: Writing timestamp_timeout=10 to /etc/sudoers.d/defaults'
@@ -55,11 +54,11 @@ fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/fun
 
 
 echo "Log: Adding lines from fullinstall.txt to packages.txt"
-cat ../Misc/fullinstall.txt >> ../packages.txt
+cat Misc/fullinstall.txt >> packages.txt
 
 # Install packages
 echo "Log: Installing packages (full)"
-yay -S --noconfirm --needed - < ../packages.txt
+yay -S --noconfirm --needed - < packages.txt
 
 
 # Copy argv.json to $HOME/.vscode (create dir if not exist)
