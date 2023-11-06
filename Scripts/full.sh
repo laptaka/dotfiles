@@ -75,4 +75,7 @@ sudo sed -i '/use_graphics_for/c\use_graphics_for linux' /boot/efi/EFI/refind/re
 echo "Log: Downloading rEFInd theme"
 sudo mkdir -p /boot/efi/EFI/refind/themes
 # git clone theme to /boot/efi/EFI/refind/themes
-sudo git clone https://github.com/bushtail/refind-efifetch ~/.config/refind/themes
+sudo git clone https://github.com/bushtail/refind-efifetch /boot/efi/EFI/refind/themes
+# append '#include themes/refind-efifetch/theme.conf' to beginning of /boot/efi/EFI/refind/refind.conf
+echo "Log: Appending '#include themes/refind-efifetch/theme.conf' to beginning of /boot/efi/EFI/refind/refind.conf"
+sudo sed -i '1s/^/#include themes\/refind-efifetch\/theme.conf\n/' /boot/efi/EFI/refind/refind.conf
