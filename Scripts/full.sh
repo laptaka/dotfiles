@@ -13,16 +13,6 @@ sudo echo "Log: Local RTC set to 1 and system clock adjusted successfully."
 sudo sed -i '/ParallelDownloads/c\ParallelDownloads = 10' /etc/pacman.conf
 echo "Log: ParallelDownloads set to 10"
 
-# Install reflector
-echo "Log: Installing reflector"
-sudo pacman -S --needed --noconfirm reflector
-
-# Replace sort by age with sort by rate in reflector.conf
-echo "Log: Replacing sort by age with sort by rate in reflector.conf"
-sudo sed -i '/--sort age/c\--sort rate' /etc/xdg/reflector/reflector.conf
-sudo systemctl enable reflector.timer
-sudo systemctl start reflector.service
-
 # Add Chaotic-AUR
 echo "Log: Adding Chaotic-AUR to pacman keyring"
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
