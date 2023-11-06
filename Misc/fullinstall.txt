@@ -21,3 +21,4 @@ yad
 lutris
 noto-fonts-emoji
 emote
+refind

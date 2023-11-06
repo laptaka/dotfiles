@@ -59,6 +59,9 @@ sudo chmod a+wr /opt/spotify/Apps -R
 echo "Log: Adding games group"
 sudo usermod -a -G games "$USER"
 
+# install refind
+refind-install  
+
 # Change timeout 20 (exact match) to timeout 10
 echo "Log: Changing timeout 20 to timeout 10 in refinf.conf"
 sudo sed -i '/timeout 20/c\timeout 10' /boot/efi/EFI/refind/refind.conf
