@@ -1,0 +1,16 @@
+{
+    "security.workspace.trust.enabled": false,
+    "editor.fontFamily": "'MesloLGS NF', 'monospace', monospace",
+    "codeium.enableConfig": {
+        "*": true
+    },
+    "editor.scrollbar.vertical": "hidden",
+    "window.titleBarStyle": "custom",
+    "window.enableMenuBarMnemonics": false,
+    "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}",
+    "editor.scrollbar.verticalScrollbarSize": 10,
+    "terminal.external.linuxExec": "kitty",
+    "terminal.explorerKind": "both",
+    "scm.alwaysShowRepositories": true,
+    "terminal.sourceControlRepositoriesKind": "both"
+}

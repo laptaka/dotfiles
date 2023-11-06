@@ -19,3 +19,5 @@ gamescope
 gamemode
 yad
 lutris
+noto-fonts-emoji
+emote

@@ -68,6 +68,9 @@ while [[ "$choice" != "m" && "$choice" != "M" && "$choice" != "f" && "$choice" !
     esac
 done
 
+# Add nvidia.conf to ~/.config/hypr/hyprland.conf
+echo -e 'source = ~/.config/hypr/nvidia.conf \n' >>${HOME}/.config/hypr/hyprland.conf
+
 # Catppuccin GTK (not sure if needed)
 echo "Log: Installing Catppuccin GTK"
 git clone --recurse-submodules https://github.com/catppuccin/gtk
@@ -131,7 +134,7 @@ sudo systemctl enable --now swayosd-libinput-backend.service
 echo "Log: Adding XDG_SCREENSHOTS_DIR to ~/.config/user-dirs.dirs"
 mkdir -p ~/Pictures/Screenshots
 # shellcheck disable=SC2016
-echo 'XDG_SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"' | tee -a ~/.config/user-dirs.dirs 
+echo 'XDG_SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"' | tee -a ~/.config/user-dirs.dirs
 
 # Copy sddm.conf to /etc/sddm.conf.d (create dir if not exist)
 echo "Log: Copying sddm.conf to /etc/sddm.conf.d"
@@ -145,6 +148,7 @@ cp -r Misc/dolphin/ ~/.local/share/
 # Copy nwg-look folder to ~/.local/share/
 echo "Log: Copying nwg-look folder to ~/.local/share/"
 cp -r Misc/nwg-look/ ~/.local/share/
+nwg-look -a
 
 # Enable SDDM at startup now
 echo "Log: Enabling SDDM now"
