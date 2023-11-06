@@ -24,7 +24,7 @@ slurp
 swappy
 cliphist
 polkit-kde-agent
-xdg-desktop-portal-hyprland-git
+xdg-desktop-portal-hyprland
 xdg-desktop-portal-gtk
 pacman-contrib
 parallel

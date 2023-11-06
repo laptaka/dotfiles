@@ -18,5 +18,4 @@ steam
 gamescope
 gamemode
 yad
-xboxdrv
 lutris
