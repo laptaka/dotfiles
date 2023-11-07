@@ -22,3 +22,9 @@ lutris
 noto-fonts-emoji
 emote
 refind
+calf
+lsp-plugins-lv2
+zam-plugins-lv2
+mda.lv2
+yelp
+ardour

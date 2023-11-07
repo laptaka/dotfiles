@@ -69,7 +69,9 @@ while [[ "$choice" != "m" && "$choice" != "M" && "$choice" != "f" && "$choice" !
 done
 
 # Add nvidia.conf to ~/.config/hypr/hyprland.conf
-echo -e 'source = ~/.config/hypr/nvidia.conf \n' >>${HOME}/.config/hypr/hyprland.conf
+if nvidia_detect; then
+    echo -e 'source = ~/.config/hypr/nvidia.conf \n' >>${HOME}/.config/hypr/hyprland.conf
+fi
 
 # Catppuccin GTK (not sure if needed)
 echo "Log: Installing Catppuccin GTK"
